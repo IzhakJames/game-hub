@@ -1,11 +1,15 @@
 import useGenre from "../hooks/useGenre";
-import { HStack, List, ListItem, Text, Image } from "@chakra-ui/react";
+import { RiSignalWifiErrorFill } from "react-icons/ri";
+import { HStack, List, ListItem, Text, Image, Spinner } from "@chakra-ui/react";
 
 const GenreList = () => {
-  const { data, error } = useGenre();
+  const { data, error, isLoading } = useGenre();
+
+  if (isLoading) return <Spinner></Spinner>;
+
   return (
     <>
-      {error && <Text>{error}</Text>}
+      {error && <RiSignalWifiErrorFill />}
       <List>
         {data.map((genre) => (
           <ListItem paddingY={2} key={genre.id}>
