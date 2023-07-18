@@ -7,6 +7,7 @@ import {
   Image,
   Spinner,
   Button,
+  Heading,
 } from "@chakra-ui/react";
 
 interface Props {
@@ -22,6 +23,9 @@ const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
   return (
     <>
       {error && <RiSignalWifiErrorFill />}
+      <Heading fontSize={"2xl"} marginBottom={3}>
+        Genre
+      </Heading>
       <List>
         {data.map((genre) => (
           <ListItem paddingY={2} key={genre.id}>
@@ -29,8 +33,11 @@ const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
               <Image
                 boxSize="32px"
                 borderRadius={8}
+                objectFit="cover"
                 src={genre.image_background}></Image>
               <Button
+                whiteSpace="normal"
+                textAlign="left"
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                 onClick={() => onSelectedGenre(genre)}
                 variant="link">
