@@ -16,7 +16,15 @@ export interface Game {
 
 const useGames = (gameQuery: GameQuery) =>
   useInfiniteQuery<FetchResponse<Game>, Error>({
-    queryKey: ["games", gameQuery],
+    queryKey: [
+      "games",
+      {
+        genres: gameQuery.genre?.id,
+        parent_platforms: gameQuery.platform?.id,
+        ordering: gameQuery.order,
+        search: gameQuery.searchText,
+      },
+    ],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
